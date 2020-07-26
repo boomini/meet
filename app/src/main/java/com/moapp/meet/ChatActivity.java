@@ -1,5 +1,6 @@
 package com.moapp.meet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,23 +24,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.moapp.meet.adapter.CheckChatListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button button, alarmbtn;
     private EditText editText;
     private ListView listView;
 
     private ArrayList<String> list = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapter;
+
+    CheckChatListAdapter cc = new CheckChatListAdapter();
+    CharSequence ccc = cc.cs;
+
 
     private String tname, chat_msg, chat_user;
     private DatabaseReference reference;
@@ -46,6 +52,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        Intent intent = new Intent(getApplicationContext(), NewAppWidget.class);
+        intent.putExtra("chatname", ccc);
+        sendBroadcast(intent);
+
+
         Bundle b = getIntent().getExtras();
         String title = b.getString("chatname");
         reference = FirebaseDatabase.getInstance()
@@ -53,10 +65,15 @@ public class ChatActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String user_id = user.getUid();
-
-        listView = (ListView) findViewById(R.id.list);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //기본타이틀 안보여줌
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        listView = (ListView) findViewById(R.id.listView);
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
+
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(arrayAdapter);

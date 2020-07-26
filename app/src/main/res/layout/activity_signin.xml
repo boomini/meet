@@ -3,23 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
     android:orientation="vertical"
-    android:weightSum="2560"> <!-- 총 레이아웃 세로 길이 2560 -->
+    android:background="@color/colorAccent"
+    android:weightSum="2560">
+<!--    android:background="@color/colorAccent"-->
+    <!-- 총 레이아웃 세로 길이 2560 -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1060"
         android:gravity="center"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
         android:weightSum="1440">  <!-- 총 레이아웃 가로 길이 1440 -->
 
         <ImageView
             android:id="@+id/LoginImg"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/ic_launcher_foreground" />
-
+            android:layout_width="400dp"
+            android:layout_height="250dp"
+            android:paddingTop="50dp"
+            android:src="@drawable/icon_meet" />
     </LinearLayout>
 
     <LinearLayout
@@ -71,7 +75,7 @@
         android:gravity="center"
         android:layout_width="280dp"
         android:layout_height="0dp"
-        android:layout_weight="160"
+        android:layout_weight="250"
         android:layout_gravity="center"
         android:weightSum="1440">
 

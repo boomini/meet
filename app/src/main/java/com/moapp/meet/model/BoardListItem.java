@@ -6,18 +6,20 @@ public class BoardListItem {
     public String Detail;
     public long Date;
     public String Writer;
-
+    public String Location;
+    public String Time;
     public BoardListItem() {
 
     }
 
-    public BoardListItem(String id,String title, String name, long date, String detail){
+    public BoardListItem(String id,String title, String name, long date, String detail, String location, String time){
         Id = id;
         Title=title;
         Date=date;
         Writer=name;
         Detail=detail;
-
+        Location=location;
+        Time=time;
     }
 
     public String getId() {
@@ -58,6 +60,22 @@ public class BoardListItem {
 
     public void setWriter(String writer) {
         Writer = writer;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
     }
 }
 

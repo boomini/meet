@@ -3,6 +3,7 @@ package com.moapp.meet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,7 +51,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //기본타이틀 안보여줌
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mAuth = FirebaseAuth.getInstance();
         id = (EditText) findViewById(R.id.InputId);
         pwd = (EditText) findViewById(R.id.InputPw);
@@ -58,46 +64,27 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         nickname = (EditText) findViewById(R.id.InputNum);
         phone = (EditText) findViewById(R.id.phone);
 
-
+        inform_check = (CheckBox) findViewById(R.id.inform_check); // 이용약관 및 정보 동의
+        inform_check.setOnClickListener(this);
         Button joinBtn = (Button) findViewById(R.id.Joinbtn); // 회원가입
         joinBtn.setOnClickListener(this);
 
     } //onCreate() 종료
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         // updateUI(currentUser);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                //데이터 받기
-                result_1 = data.getStringExtra("result_1"); // 이용약관
-                result_1.toString();
-            }
-        }
-
-        if (requestCode == 2) {
-            if (resultCode == RESULT_OK) {
-                //데이터 받기
-                result_2 = data.getStringExtra("result_2");
-                result_2.toString();
-            }
-        }
-
-        if (result_1 != null && result_2 != null) {
-            if (result_1.equals(closePopup_1) && result_2.equals(closePopup_2)) { // 정보 제공, 이용 약관 모두 확인 시
-                inform_check.setChecked(true); // 체크 박스 체크
-                inform_check.setEnabled(false); // 체크 박스 사용 불가 상태
-            }
-
-        }
-
     }
 
     @Override
@@ -133,6 +120,10 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
                 else if(spaceCheck(tpwd)){
                     Toast.makeText(this, "비밀번호에 공백을 사용할 수 없습니다!", Toast.LENGTH_SHORT).show();
+
+                }
+                else if(inform_check.isChecked() == false){
+                    Toast.makeText(this, "이용약관 및 사용자 정보제공 \n동의는 필수입니다!", Toast.LENGTH_SHORT).show();
 
                 }
 

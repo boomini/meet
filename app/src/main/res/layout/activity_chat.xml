@@ -1,18 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dasong.errands.ChatActivity">
-
-    <ListView
-        android:id="@+id/list"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.moapp.meet.CheckChatListActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:layout_anchorGravity="bottom|center">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:background="@color/colorAccent"
+            android:splitMotionEvents="false"
+            app:layout_scrollFlags="scroll"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+
+            <TextView
+                android:id="@+id/appname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="채팅창"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:background="@color/colorAccent"
+                android:textSize="18sp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                />
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_above="@+id/layout"/>
+        android:layout_below="@id/appBarLayout">
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"></ListView>
 
-
+    </FrameLayout>
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:padding="7dp"
@@ -20,6 +64,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <EditText
             android:id="@+id/editText"
@@ -32,6 +77,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:text="전송"
             />
 

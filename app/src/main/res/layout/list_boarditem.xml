@@ -65,13 +65,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-            <ImageButton
+            <ImageView
                 android:id="@+id/LoginImg"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:gravity="right"
                 android:background="#ffffff"
-                android:src="@drawable/star"/>
+                android:src="@drawable/icon_meeet"/>
 
         </LinearLayout>
 

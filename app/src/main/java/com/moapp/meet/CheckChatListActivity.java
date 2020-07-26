@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,12 +20,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.moapp.meet.adapter.CheckChatListAdapter;
 
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
-public class CheckChatListActivity extends Activity {
+public class CheckChatListActivity extends AppCompatActivity {
     private Activity activity;
     public static Context context;
     private CheckChatListAdapter adapter;
@@ -40,6 +44,11 @@ public class CheckChatListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //기본타이틀 안보여줌
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         lv = (ListView)findViewById(R.id.listView);
         db.collection("users").document(user_id)
                 .get()
@@ -63,7 +72,16 @@ public class CheckChatListActivity extends Activity {
 
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void init(){
         list=(ListView)findViewById(R.id.listView);
         setList();

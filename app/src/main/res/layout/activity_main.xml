@@ -7,17 +7,219 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-
-    <Button
-        android:id="@+id/btn_board"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="게시판가기" />
+        android:background="@color/colorAccent"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:layout_anchorGravity="bottom|center">
 
-    <Button
-        android:id="@+id/btn_chat"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:background="@color/colorAccent"
+            android:splitMotionEvents="false"
+            app:layout_scrollFlags="scroll"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <TextView
+                android:id="@+id/appname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meet."
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:background="@color/colorAccent"
+                android:textSize="18sp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="채팅창확인하기" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activities.MainActivity"
+        tools:showIn="@layout/activity_main">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_margin="20sp"
+                android:paddingTop="15dp">
+
+                <TableRow>
+
+                    <ImageButton
+                        android:id="@+id/btn_sports"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/sports" />
+
+                    <ImageButton
+                        android:id="@+id/btn_study"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/icon_study"
+                        />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="스포츠"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="스터디"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+                </TableRow>
+
+
+                <TableRow>
+
+                    <ImageButton
+                        android:id="@+id/btn_language"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/icon_language" />
+
+                    <ImageButton
+                        android:id="@+id/btn_friend"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/icon_friend" />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="언어교환"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="친목"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+                </TableRow>
+
+                <TableRow>
+
+                    <ImageButton
+                        android:id="@+id/btn_book"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/icon_book" />
+
+                    <ImageButton
+                        android:id="@+id/btn_etc"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/icon_etc"/>
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="독서모임"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="etc"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/nanumsquareroundb"
+                        />
+                </TableRow>
+
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </LinearLayout>

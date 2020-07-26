@@ -1,7 +1,12 @@
 package com.moapp.meet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,10 +32,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,9 +52,26 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUp;
     String loginid, loginpwd;
     private static final String TAG = "EmailLogin";
-
+    private int tcount;
     // Cloud Firestore 인스턴스를 초기화합니다.
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+    //자동로그인
+    //자동로그인
+    //자동로그인
+    //자동로그인
+
+    SharedPreferences auto;
+    SharedPreferences.Editor autoLogin;
+    SharedPreferences.Editor editor;
+
+
+
+    //자동로그인
+    //자동로그인
+    //자동로그인
+    //자동로그인
 
 
     @Override
@@ -74,7 +101,32 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
+    getHashKey();
+        //자동로그인
+        //자동로그인
+        //자동로그인
+        //자동로그인
 
+        auto = getSharedPreferences("auto", MODE_PRIVATE);
+
+        loginid = auto.getString("inputId",null);
+        loginpwd = auto.getString("inputPwd",null);
+
+        if(loginid !=null && loginpwd != null) {
+
+            startLogin(loginid,loginpwd);
+
+            Toast.makeText(getApplicationContext(), loginid +"님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+        //자동로그인
+        //자동로그인
+        //자동로그인
+        //자동로그인
+        //자동로그인
+        //자동로그인
     }
 
     private void signIn() {
@@ -134,9 +186,28 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            //String uid=user.getEmail();
+
+                            auto = getSharedPreferences("auto", MODE_PRIVATE);
+                            editor = auto.edit();
+                            //editor.clear()는 auto에 들어있는 모든 정보를 기기에서 지운다
+                            editor.clear();
+                            editor.commit();
+
+
+                            auto = getSharedPreferences("auto", MODE_PRIVATE);
+                            autoLogin = auto.edit();
+                            autoLogin.putString("inputId", loginid);
+                            autoLogin.putString("inputPwd", loginpwd);
+                            //꼭 commit()을 해줘야 값이 저장됨
+                            autoLogin.commit();
+                            Toast.makeText(getApplicationContext(), loginid+"님 환영합니다.", Toast.LENGTH_SHORT).show();
+
+
+                            //자동 로그인
+                            //자동 로그인
+                            //자동 로그인
+                            //자동 로그인
 
                             startActivity(intent);
                             finish();
@@ -181,6 +252,28 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+    }
+
+
 
     // 파이어스토어 데이터베이스 생성
     public void setDocument() {
@@ -195,22 +288,39 @@ public class LoginActivity extends AppCompatActivity {
         user.put("NickName", mUser.getDisplayName());
         user.put("PhoneNumber", mUser.getPhoneNumber());
         user.put("BoardCount", "0");
-
-        db.collection("users")
-                .document(userUID)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("users").document(userUID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error adding document", e);
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                //닉네임 받아오기
+                                tcount = Integer.valueOf(document.getString("BoardCount"));
+                            } else {
+                                db.collection("users")
+                                        .document(userUID)
+                                        .set(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("TAG", "DocumentSnapshot successfully written!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("TAG", "Error adding document", e);
+                                            }
+                                        });
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
                     }
                 });
+
     }
 
 }

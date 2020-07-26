@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/check_chat"
+            android:title="내 채팅방 확인하기" />
+        <item
+            android:id="@+id/check_map"
+            android:title="내 주변 모임 확인하기" />
+        <item
+            android:id="@+id/ask"
+            android:title="문의하기" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="로그아웃" />
+
+    </group>
+
+</menu>

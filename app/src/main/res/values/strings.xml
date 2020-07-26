@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">meet</string>
+    <string name="daummap_key">a3476ef4aa4d2b3c9a87099aceffbbf0</string>
+    <string name="restapi_key">KakaoAK 706c8fddef02e521ced3437419decfad</string>
+    <!-- Ted Permission -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
+    <string name="permission_2">맵사용을 위해 위치정보 이용 권한이 필요합니다.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
 </resources>

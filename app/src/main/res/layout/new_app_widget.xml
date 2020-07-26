@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widgetbackground"
+    android:padding="@dimen/widget_margin">
+
+
+    <ImageView
+
+        android:id="@+id/imageView"
+        android:layout_width="152dp"
+        android:layout_height="119dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingTop="20dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:paddingBottom="20dp"
+        android:textStyle="bold"
+        android:text="최근에 참여한 모임" />
+
+
+    <TextView
+        android:id="@+id/Chatname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:hint="가장 최근에 들어간 채팅창"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

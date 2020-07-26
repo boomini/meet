@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "509961384271",
+    "firebase_url": "https://meet-576a5.firebaseio.com",
+    "project_id": "meet-576a5",
+    "storage_bucket": "meet-576a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509961384271:android:0b621b4f8fb90f1c02153a",
+        "android_client_info": {
+          "package_name": "com.moapp.meet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509961384271-826m34eit78k0fmerj97no90eaai8cev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moapp.meet",
+            "certificate_hash": "a2b2290dda23137cba3814a94883b83d43fdf98b"
+          }
+        },
+        {
+          "client_id": "509961384271-ghmolfc4o4kenn3rt158gcgj0c8m902v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQWmHz73UlA_PtTZM4kGHC_cL2RTIPQh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509961384271-ghmolfc4o4kenn3rt158gcgj0c8m902v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
